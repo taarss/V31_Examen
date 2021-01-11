@@ -27,12 +27,12 @@ function checkLoggedIn($con)
         if ($stmt->num_rows > 0) {
         } else {
             // If the user is not logged in redirect to the login page.
-            header('Location: login.php');
+            header('Location: index.php');
             exit;
         }
     } else if (!isset($_SESSION['loggedin'])) {
         // If the user is not logged in redirect to the login page.
-        header('Location: login.php');
+        header('Location: index.php');
         exit;
     }
 }
