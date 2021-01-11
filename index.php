@@ -1,3 +1,6 @@
+<?php 
+    include 'main.php';
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -7,7 +10,7 @@
     <title>Forside | FancyClothes.dk</title>
     <meta name="description" content="Velkommen til FancyClothes.dk">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
@@ -29,7 +32,7 @@
         <div class="language">
             <div class="flag">
                 <img src="img/ikon.png" alt="Dansk ikon">
-                <span>Dansk</span>
+                <span><?php echo var_dump($_SESSION); ?>Dansk</span>
             </div>
             <span>DKK</span>
         </div>
@@ -44,37 +47,7 @@
         <h2></h2>
     </div>
     <hr>
-    <div class="container navbar">
-        <nav>
-            <ul>
-                <li class="active"><a href="index.php">Forside</a></li>
-                <li><a href="#">Produkter</a></li>
-                <li><a href="#">Nyheder</a></li>
-                <li><a href="#">Handelsbetingelser</a></li>
-                <li><a href="#">Om os</a></li>
-                <li><a href='#' class='loginBtn'>Log ind</a></li>
-                <li><a href='register.php' class='loginBtn'>Opret bruger</a></li>
-            </ul>
-        </nav>
-        <div class="basket">
-            <div class="basketContent">
-                <p>Din indkøbskurv er tom</p>
-            </div>
-            <div class="shopIcon">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </div>
-        </div>
-    </div>
-    <div class="login container">
-        <form action="login.php" method="post">
-            <label for="formUsername">Bruger:</label>
-            <input type="text" id="formUsername" name="formUsername" placeholder="Brugernavn" required>
-            <label for="formPassword">Password:</label>
-            <input type="password" id="formPassword" name="formPassword" placeholder="Password" required>
-            <input type="submit" value="Log ind">
-        </form>
-        <a id="newUser" href="register.php">Ny bruger?</a>
-    </div>
+        <?php include 'nav.php' ?>
     <hr>
     <div class="container">
         <ul class="slider" id="slider">
@@ -206,7 +179,25 @@
 
     <!-- Add your site or application content here -->
 
-
+    <script>
+		$(".login form").submit(function(event) {
+			event.preventDefault();
+			var form = $(this);
+			var url = form.attr('action');
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: form.serialize(),
+				success: function(data) {
+					if (data.toLowerCase().includes("success")) {
+						window.location.href = "index.php";
+					} else {
+						$(".msg").text(data);
+					}
+				}
+			});
+		});
+	</script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')

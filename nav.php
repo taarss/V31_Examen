@@ -1,10 +1,50 @@
-<?php
-$stmt = $con->prepare('SELECT * FROM categories LIMIT 5');
-$stmt->execute();
-$result = $stmt->get_result();
-$categories = $result->fetch_all(MYSQLI_ASSOC);
-$stmt->close();
-?>
+<div class="container navbar">
+        <nav>
+            <ul>
+                <li class="active"><a href="index.php">Forside</a></li>
+                <li><a href="#">Produkter</a></li>
+                <li><a href="#">Nyheder</a></li>
+                <li><a href="#">Handelsbetingelser</a></li>
+                <li><a href="#">Om os</a></li>
+                <?php if(!$_SESSION['loggedin']) { ?> 
+                    <li><a href='#' class='loginBtn'>Log ind</a></li>
+                    <li><a href='register.html'>Opret bruger</a></li>
+                <?php }
+                else {?>
+                     <li><a href='logout.php'>Log ud</a></li>
+               <?php }?>
+            </ul>
+        </nav>
+        <div class="basket">
+            <div class="basketContent">
+                <p>Din indkøbskurv er tom</p>
+            </div>
+            <div class="shopIcon">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </div>
+        </div>
+</div>
+    <div class="login container">
+        <form class="login d-flex flex-wrap" action="authenticate.php" method="post">
+					<input type="text" name="username" placeholder="Username" id="username" required>
+					<input type="password" name="password" placeholder="Password" id="password" required>
+
+				<div class="msg"></div>
+
+                    <input type="submit" value="Login">
+                    <a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
+
+            
+        </form>
+        <a id="newUser" href="register.php">Ny bruger?</a>
+    </div>
+
+
+
+
+<?php 
+
+/*
 <nav class="d-flex bg-light pb-2 navbar-fixed-top border-bottom justify-content-between" id="navBar">
         <div class="d-flex col-6">
             <img class="img-fluid m-3" id="logo" src="img/wasd-logo.png">
@@ -48,4 +88,12 @@ $stmt->close();
                 <a class="mr-5 align-self-center" href="login.php"><i class="fas fa-sign-in-alt fa-2x text-secondary "></i></a>
         <?php } ?>
        
-    </nav>
+    </nav>*/
+
+?>
+
+
+
+
+
+

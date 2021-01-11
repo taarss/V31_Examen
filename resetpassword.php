@@ -6,11 +6,11 @@ $msg = '';
 if (isset($_GET['email'], $_GET['code']) && !empty($_GET['code'])) {
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     $stmt = $con->prepare('SELECT * FROM accounts WHERE email = ? AND reset = ?');
-    $stmt->bind_param('ss', $_GET['email'], $_GET['code']);
+    $stmt->bindParam(1, $_GET['email']);
+    $stmt->bindParam(2, $_GET['code']);
+
     $stmt->execute();
-    $result = $stmt->get_result();
-    $account = $result->fetch_array(MYSQLI_ASSOC);
-    $stmt->close();
+    $account = $stmt->fetch();
     // If the account exists with the email and code
     if ($account) {
         if (isset($_POST['npassword'], $_POST['cpassword'])) {
@@ -21,9 +21,9 @@ if (isset($_GET['email'], $_GET['code']) && !empty($_GET['code'])) {
             } else {
                 $stmt = $con->prepare('UPDATE accounts SET password = ?, reset = "" WHERE email = ?');
                 $password = password_hash($_POST['npassword'], PASSWORD_DEFAULT);
-                $stmt->bind_param('ss', $password, $_GET['email']);
+                $stmt->bindParam(1, $password);
+                $stmt->bindParam(2, $_GET['email']);
                 $stmt->execute();
-                $stmt->close();
                 $msg = 'Password has been reset! You can now <a href="index.php">login</a>!';
             }
         }

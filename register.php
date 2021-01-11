@@ -34,7 +34,6 @@ $stmt->bindParam(2, $_POST['email']);
 $stmt->execute();
 $user = $stmt->fetch();
 // Store the result so we can check if the account exists in the database.
-//$result = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($user) {
 	echo 'Username and/or email exists!';
 
