@@ -37,7 +37,11 @@ if ($user) {
 			$stmt->bindParam(2, $id);
 			$stmt->execute();
 		}
-		echo 'Success';
+		if (isset($_SESSION['loggedin'])) {
+			// If the user is not logged in redirect to the home page.
+			header('Location: index.php');
+			exit;
+		}
 	} elseif ($activation_code != 'activated') {
 		echo 'Please activate your account to login!';
 	} else {
