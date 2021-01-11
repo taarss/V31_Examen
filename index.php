@@ -28,25 +28,7 @@
 </head>
 
 <body>
-    <div class="top container">
-        <div class="language">
-            <div class="flag">
-                <img src="img/ikon.png" alt="Dansk ikon">
-                <span><?php echo var_dump($_SESSION); ?>Dansk</span>
-            </div>
-            <span>DKK</span>
-        </div>
-        <div class="search">
-            <input type="text" placeholder="Indtast søgning"><input type="submit" value="Søg">
-        </div>
-    </div>
-    <hr>
-    <div class="container home">
-        <a href="index.php"><img src="img/homeIcon.png" alt="Forside ikon"></a>
-        <!-- Velkomstbesked -->
-        <h2></h2>
-    </div>
-    <hr>
+    
         <?php include 'nav.php' ?>
     <hr>
     <div class="container">

@@ -1,3 +1,22 @@
+<div class="top container">
+        <div class="language">
+            <div class="flag">
+                <img src="img/ikon.png" alt="Dansk ikon">
+                <span><?php echo var_dump($_SESSION); ?>Dansk</span>
+            </div>
+            <span>DKK</span>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Indtast søgning"><input type="submit" value="Søg">
+        </div>
+    </div>
+    <hr>
+    <div class="container home">
+        <a href="index.php"><img src="img/homeIcon.png" alt="Forside ikon"></a>
+        <!-- Velkomstbesked -->
+        <h2></h2>
+    </div>
+    <hr>
 <div class="container navbar">
         <nav>
             <ul>
@@ -31,13 +50,14 @@
 
 				<div class="msg"></div>
 
+				<a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
                     <input type="submit" value="Login">
-                    <a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
-
+                    				<a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
             
         </form>
         <a id="newUser" href="register.php">Ny bruger?</a>
     </div>
+    <hr>
 
 
 
