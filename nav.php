@@ -20,11 +20,10 @@
 <div class="container navbar">
         <nav>
             <ul>
-                <li class="active"><a href="index.php">Forside</a></li>
-                <li><a href="products.php">Produkter</a></li>
-                <li><a href="#">Nyheder</a></li>
-                <li><a href="#">Handelsbetingelser</a></li>
-                <li><a href="#">Om os</a></li>
+                <li class="<?php if($currentPage =='home'){echo 'active';}?>"><a href="index.php">Forside</a></li>
+                <li class="<?php if($currentPage =='products'){echo 'active';}?>"><a href="products.php">Produkter</a></li>
+                <li class="<?php if($currentPage =='news'){echo 'active';}?>"><a href="#">Nyheder</a></li>
+                <li class="<?php if($currentPage =='tos'){echo 'active';}?>"><a href="#">Handelsbetingelser</a></li>
                 <?php if(!$_SESSION['loggedin']) { ?> 
                     <li><a href='#' class='loginBtn'>Log ind</a></li>
                     <li><a href='#' class='registerBtn'>Opret bruger</a></li>
@@ -38,7 +37,7 @@
                $stmt->execute();
                $adminLevel = $stmt->fetch();
                if (intval($adminLevel) == 1) {?>
-                <li><a href='adminPanel.php'>Admin Panel</a></li>
+                <li class="<?php if($currentPage =='adminpanel'){echo 'active';}?>"><a href='adminPanel.php'>Admin Panel</a></li>
               <?php }
                ?>
             </ul>

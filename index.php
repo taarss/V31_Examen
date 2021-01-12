@@ -1,5 +1,6 @@
 <?php 
     include 'main.php';
+    $currentPage = 'home';
 ?>
 <!doctype html>
 <html class="no-js" lang="en">

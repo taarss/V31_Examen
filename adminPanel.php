@@ -1,5 +1,6 @@
 <?php 
     include 'main.php';
+    $currentPage = 'adminpanel';
     checkLoggedIn($con);
     $stmt = $con->prepare('SELECT adminLevel FROM accounts WHERE id = ?');
     $stmt->bindParam(1, $_SESSION['id']);
