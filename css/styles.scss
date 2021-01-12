@@ -619,7 +619,9 @@ h6 {
     }
   }
   .manageProductsImg{
-    width: 270px !important;
+    width: 80px !important;
+    overflow-y: hidden;
+    overflow: hidden !important;
   }
   
   .hiddenTableResult{

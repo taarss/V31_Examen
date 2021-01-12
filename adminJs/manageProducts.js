@@ -129,6 +129,18 @@ document.querySelector(".manageProductsBtn").onclick = e => {
             }
         });
     }
+    function setClothingSex(comboBox, selectedOption) {
+       let options = ['male', 'female', 'unisex'];
+       options.forEach(element => {
+           let option = document.createElement("option");
+           option.setAttribute("value", element); 
+           option.innerHTML = element;  
+           if (element == selectedOption) {
+                option.selected = "selected";
+           }
+           comboBox.appendChild(option);
+       });                
+    }
         function createRow(data, type) {
             data.forEach(element => {
                 let rowForm = document.createElement("form");
@@ -137,7 +149,7 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 nameInput.setAttribute("type", "text");
                 nameInput.setAttribute("value", element["name"]);
                 nameInput.setAttribute("name", "name");
-                nameInput.setAttribute("class", "col-1");
+                nameInput.setAttribute("class", "col-2");
                 rowForm.appendChild(nameInput);
                 let priceInput = document.createElement("input");
                 priceInput.setAttribute("type", "text");
@@ -192,15 +204,18 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 descriptionInput.setAttribute("value", element["description"]);
                 rowForm.appendChild(descriptionInput);
 
-
+           
                 let imageInput = document.createElement("input");
                 imageInput.setAttribute("type", "file");
                 imageInput.setAttribute("class", "categoryImageUpdateInput");
                 imageInput.setAttribute("name", "post_img");
                 imageInput.setAttribute("class", "manageProductsImg");
-                imageInput.setAttribute("style", "width: 270px");
-
+                imageInput.setAttribute("style", "width: : 100px");
                 rowForm.appendChild(imageInput);
+                let sexInput = document.createElement("select");
+                sexInput.setAttribute("class", "col-1 mx-2 manageClothingsexInput");
+                sexInput.setAttribute("name", "clothingsex");
+                rowForm.appendChild(sexInput);
                 rowForm.setAttribute("action", "updateProducts.php")
                 rowForm.setAttribute("method", "post")
                 let saveChangesInput = document.createElement("input");
@@ -228,6 +243,7 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 rowForm.appendChild(categoryId);
                 document.querySelector(".manageCategoriesTable").appendChild(rowForm);                
                 getCategories(categoryInput, element["type"]);
+                setClothingSex(sexInput, element["sex"]);
             });
         }
 

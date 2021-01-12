@@ -36,7 +36,6 @@ $user = $stmt->fetch();
 // Store the result so we can check if the account exists in the database.
 if ($user) {
 	echo 'Username and/or email exists!';
-
 } else {
 	// Username doesnt exists, insert new account
 	$stmt = $con->prepare('INSERT INTO accounts (username, password, email, activation_code) VALUES (?, ?, ?, ?)');

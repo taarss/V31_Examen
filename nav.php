@@ -21,17 +21,26 @@
         <nav>
             <ul>
                 <li class="active"><a href="index.php">Forside</a></li>
-                <li><a href="#">Produkter</a></li>
+                <li><a href="products.php">Produkter</a></li>
                 <li><a href="#">Nyheder</a></li>
                 <li><a href="#">Handelsbetingelser</a></li>
                 <li><a href="#">Om os</a></li>
                 <?php if(!$_SESSION['loggedin']) { ?> 
                     <li><a href='#' class='loginBtn'>Log ind</a></li>
-                    <li><a href='register.html'>Opret bruger</a></li>
+                    <li><a href='#' class='registerBtn'>Opret bruger</a></li>
                 <?php }
                 else {?>
                      <li><a href='logout.php'>Log ud</a></li>
                <?php }?>
+               <?php
+               $stmt = $con->prepare('SELECT adminLevel FROM accounts WHERE id = ?');
+               $stmt->bindParam(1, $_SESSION['id']);
+               $stmt->execute();
+               $adminLevel = $stmt->fetch();
+               if (intval($adminLevel) == 1) {?>
+                <li><a href='adminPanel.php'>Admin Panel</a></li>
+              <?php }
+               ?>
             </ul>
         </nav>
         <div class="basket">
@@ -48,14 +57,48 @@
 					<input type="text" name="username" placeholder="Username" id="username" required>
 					<input type="password" name="password" placeholder="Password" id="password" required>
 
-				<div class="msg"></div>
+				<div class="loginmsg"></div>
 
-				<a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
                     <input type="submit" value="Login">
-                    				<a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
+                    <a class="forgotPass" href="forgotpassword.php">Forgot Password?</a>
             
         </form>
-        <a id="newUser" href="register.php">Ny bruger?</a>
+        <a id="newUser" class="registerBtn" href="#">Ny bruger?</a>
+    </div>
+    <div class="register container">
+    <form action="register.php" method="post" autocomplete="off">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            id="username"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+            required
+          />
+          <input
+            type="password"
+            name="cpassword"
+            placeholder="Confirm Password"
+            id="cpassword"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            id="email"
+            required
+          />
+          <input type="submit" value="Register" />
+          <div class="registermsg"></div>
+
+        </form>
     </div>
     <hr>
 
