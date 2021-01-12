@@ -1,21 +1,28 @@
 <?php    
     include 'main.php';
+    $currentPage = 'products';
     $currentProduct = $_GET['id'];
     $stmt = $con->prepare('SELECT id, name, price, isOnSale, img, description, manufactur, type, saleValue, dateCreated FROM products WHERE id = ?');
-    $stmt->bind_param('s', $currentProduct);
+    $stmt->bindParam(1, $currentProduct);
     $stmt->execute();
-    $stmt->bind_result($id, $name, $price, $isOnSale, $img, $description, $manufactur, $type, $saleValue, $dateCreated);
-    $stmt->fetch();
-    $stmt->close();
+    $product = $stmt->fetch();
+    $id = $product['id'];
+    $name = $product['name'];
+    $price = $product['price'];
+    $isOnSale = $product['isOnSale'];
+    $img = $product['img'];
+    $description = $product['description'];
+    $manufactur = $product['manufactur'];
+    $type = $product['type'];
+    $saleValue = $product['saleValue'];
+    $dateCreated = $product['dateCreated'];
 
 
     $stmt = $con->prepare('SELECT * FROM products WHERE type = ? ORDER BY RAND()
     LIMIT 6');
-    $stmt->bind_param('s', $type);
+    $stmt->bindParam(1, $type);
     $stmt->execute();
-    $result = $stmt->get_result();
-    $recommendedProducts = $result->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
+    $recommendedProducts = $stmt->fetchAll();
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +33,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
 </head>
@@ -56,7 +64,7 @@
                     </div>
                 </div>
                 <div class="mx-3">
-                    <h5 class="text-light p-1 mt-5" style="background-color: #007681">Description</h5>
+                    <h5 class="text-light p-1 mt-5" style="background-color: #333">Description</h5>
                     <div class="w-100 border">
                         <p><?= $description?></p>
                     </div>
@@ -126,7 +134,6 @@
     <footer>
 
     </footer>
-    
     <script>
 		$(".login form").submit(function(event) {
 			event.preventDefault();
@@ -146,19 +153,15 @@
 			});
 		});
     </script>
-    
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')
     </script>
     <script src="js/plugins.js"></script>
-    <script src="js/slider.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        $(window).on("load", function() {
-            $("#slider").slider();
-        });
-    </script>
-    <script>
+
       $(".register form").submit(function (event) {
         event.preventDefault();
         var form = $(this);
@@ -172,6 +175,7 @@
           },
         });
       });
+      
     </script>
         <script src="js/myScript.js"></script>
 

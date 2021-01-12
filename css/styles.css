@@ -711,4 +711,8 @@ h6 {
 .offWhite {
   background-color: #eaeaea;
 }
+
+.inspiration div div a {
+  color: black;
+}
 /*# sourceMappingURL=styles.css.map */

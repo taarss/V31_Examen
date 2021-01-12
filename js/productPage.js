@@ -24,8 +24,28 @@ let selectedId = urlParams.get('category');
                 };
             }
         });
-
+        document.querySelector(".genderMale").addEventListener("click", function(){
+            viewNewGender("male");
+          });
+          document.querySelector(".genderFemale").addEventListener("click", function(){
+            viewNewGender("female");
+          });
+          document.querySelector(".genderUnisex").addEventListener("click", function(){
+            viewNewGender("unisex");
+          });
         function viewNewCategory(newCategory) {
-            window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category="+newCategory;
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const gender = urlParams.get('gender')
+            if (gender) {
+                window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category="+newCategory+"&gender="+gender;
+            }
+            else{
+                window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category="+newCategory;
+            }
         }
+        function viewNewGender(newGender) {
+            window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category=0&gender="+newGender;
+        }
+        
         

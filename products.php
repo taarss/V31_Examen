@@ -1,9 +1,10 @@
 <?php 
     include 'main.php';
+    $currentPage = 'products';
     if(!isset($_GET['category']))
-        {
-            header('Location: products.php?category=0');
-        }
+    {
+        header('Location: products.php?category=0');
+    }
     $currentCategory = $_GET['category'];
     $stmt = $con->prepare('SELECT * FROM categories');
 	$stmt->execute();
@@ -21,7 +22,15 @@
         $stmt->execute();
         $products = $stmt->fetchAll();
     }
-    
+    if (isset($_GET['gender'])) {
+        $products = array_filter($products, "filterByGender");
+    }
+    function filterByGender($productArray)
+    {
+        if ($productArray['sex'] == $_GET['gender']) {
+            return $productArray;
+        }
+    }
 
     if (isset($_POST['newPage'])) {
         $newCategory = $_POST['newCategory'];
@@ -47,7 +56,27 @@
    <?php     include 'nav.php';?>
     <main class="d-flex justify-content-center">
         <div class="col-9 pt-5 mt-5" style="background-color: ghostWhite; min-height: 100vh">
-                <div class="border-bottom d-flex justify-content-end">
+        <div class="products">
+            <div class="inspiration">
+                <div class="catMen">
+                    <img src="img/kategoriHerre.jpg" alt="">
+                    <h5>Herretøj</h5>
+                    <div class="action"><a href="#" class="genderMale">Se mere</a></div>
+                </div>
+                <div class="catWomen">
+                    <img src="img/kategoriKvinde.jpg" alt="">
+                    <h5>Kvindetøj</h5>
+                    <div class="action"><a href="#" class="genderFemale">Se mere</a></div>
+                </div>
+                <div class="catWomen">
+                    <img src="img/unisex.jpeg" alt="">
+                    <h5>Unisex</h5>
+                    <div class="action"><a href="#" class="genderUnisex">Se mere</a></div>
+                </div>
+            </div>
+        </div>
+        
+            <div class="border-bottom d-flex justify-content-end">
                     <select class="productPageSearch mr-5 mb-3">
                         <option selected="selected" value=0>All Categories</option>
                     </select>
@@ -62,7 +91,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title"><?=$key['name']?></h4>
                                         <p class="card-text"><?=$key['price']?>.00$</p>
-                                        <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                        <a class="btn" id="addToCart" style="background-color: #333; color: white" href="#">Add to cart</a>
                                     </div>
                             </div>
                         </div>      
