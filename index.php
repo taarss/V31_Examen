@@ -28,9 +28,7 @@
 </head>
 
 <body>
-    
         <?php include 'nav.php' ?>
-    <hr>
     <div class="container">
         <ul class="slider" id="slider">
             <li><img src="img/slide1.jpg" alt=""></li>
@@ -51,12 +49,15 @@
                 </div>
                 <div class="catMain">
                     <ul>
-                        <li><a href="#">Jakker</a></li>
-                        <li><a href="#">Bukser</a></li>
-                        <li><a href="#">Skjorter</a></li>
-                        <li><a href="#">Strik</a></li>
-                        <li><a href="#">T-shirts & Tank tops</a></li>
-                        <li><a href="#">Tasker</a></li>
+                        <?php 
+                            $stmt = $con->prepare('SELECT * FROM categories');
+                            $stmt->execute();
+                            $result = $stmt->fetchAll();
+                            foreach ($result as $category) {?>
+                                <li><a href="product.php?category=<?=$category['id']?>"><?=$category['name']?></a></li>
+
+                         <?php   }          
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -174,24 +175,41 @@
 					if (data.toLowerCase().includes("success")) {
 						window.location.href = "index.php";
 					} else {
-						$(".msg").text(data);
+						$(".loginmsg").text(data);
 					}
 				}
 			});
 		});
-	</script>
+    </script>
+    
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')
     </script>
     <script src="js/plugins.js"></script>
     <script src="js/slider.min.js"></script>
-    <script src="js/myScript.js"></script>
     <script>
         $(window).on("load", function() {
             $("#slider").slider();
         });
     </script>
+    <script>
+      $(".register form").submit(function (event) {
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr("action");
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: form.serialize(),
+          success: function (data) {
+            $(".registermsg").text(data);
+          },
+        });
+      });
+    </script>
+        <script src="js/myScript.js"></script>
+
 </body>
 
 </html>

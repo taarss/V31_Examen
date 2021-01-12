@@ -19,7 +19,7 @@
             $uploadOk = 0;
           }      
         if (in_array($file_extn, $allowed) === true && $uploadOk == 1) {
-            updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['isOnSale'], $_POST['description'], $_POST['manufactur'], $_POST['saleValue'], $_POST['category'], $con);
+            updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['isOnSale'], $_POST['description'], $_POST['manufactur'], $_POST['saleValue'], $_POST['category'], $con, $_POST['clothingsex']);
             updateIcon($_POST['id'], $file_temp, $file_extn, $con);
         } elseif (in_array($file_extn, $allowed) === false) {
             echo 'Incorrect file type ';
@@ -29,7 +29,7 @@
         }
       }
       else {
-        updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['isOnSale'], $_POST['description'], $_POST['manufactur'], $_POST['saleValue'], $_POST['category'], $con);
+        updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['isOnSale'], $_POST['description'], $_POST['manufactur'], $_POST['saleValue'], $_POST['category'], $con, $_POST['clothingsex']);
       }
     
 
@@ -41,12 +41,12 @@
       $stmt->bindParam(2, $id);
       $stmt->execute();
     };
-    function updateProduct($id, $name, $price, $isOnSale, $description, $manufactur, $saleValue, $category, $con)
+    function updateProduct($id, $name, $price, $isOnSale, $description, $manufactur, $saleValue, $category, $con, $clothingSex)
     {
         if (strpos($saleValue, '%') !== false) {
             $saleValue = str_replace("%","",$saleValue);
         } 
-        $stmt = $con->prepare('UPDATE products SET name = ?, price = ?, isOnSale = ?, description = ?, manufactur = ?, type = ?, saleValue = ? WHERE id = ?');
+        $stmt = $con->prepare('UPDATE products SET name = ?, price = ?, isOnSale = ?, description = ?, manufactur = ?, type = ?, saleValue = ?, sex = ? WHERE id = ?');
         $stmt->bindParam(1, $name);
         $stmt->bindParam(2, $price);
         $stmt->bindParam(3, $isOnSale);
@@ -54,7 +54,8 @@
         $stmt->bindParam(5, $manufactur);
         $stmt->bindParam(6, $category);
         $stmt->bindParam(7, $saleValue);
-        $stmt->bindParam(8, $id);
+        $stmt->bindParam(8, $clothingSex);
+        $stmt->bindParam(9, $id);
 
         $stmt->execute();
     };

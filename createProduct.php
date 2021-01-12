@@ -18,7 +18,7 @@
             $uploadOk = 0;
           }      
 		if (in_array($file_extn, $allowed) === true && $uploadOk == 1) {
-			uploadProduct($_POST['post_name'], $_POST['post_price'], $_POST['post_description'], $_POST['post_manufactur'], $_POST['post_type'], $file_temp, $file_extn, $con);
+			uploadProduct($_POST['post_name'], $_POST['post_price'], $_POST['post_description'], $_POST['post_manufactur'], $_POST['post_type'], $file_temp, $file_extn, $con, $_POST['clothingsex']);
 		} elseif (in_array($file_extn, $allowed) === false) {
 			echo 'Incorrect file type ';
 			echo implode(',', $allowed);
@@ -26,17 +26,18 @@
 		echo 'fejl';
     }
 
-    function uploadProduct($name, $price, $description, $manufactur, $type, $file_temp, $file_extn, $con)
+    function uploadProduct($name, $price, $description, $manufactur, $type, $file_temp, $file_extn, $con, $clothingsex)
     {
         $file_path = 'uploads/' . substr(md5(time()), 0, 10) . '.' . $file_extn;
         move_uploaded_file($file_temp, $file_path);
-        $stmt = $con->prepare('INSERT INTO products (name, price, description, manufactur, type, img) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt = $con->prepare('INSERT INTO products (name, price, description, manufactur, type, img, sex) VALUES (?, ?, ?, ?, ?, ?, ?)');
         $stmt->bindParam(1, $name);
         $stmt->bindParam(2, $price);
         $stmt->bindParam(3, $description);
         $stmt->bindParam(4, $manufactur);
         $stmt->bindParam(5, $type);
         $stmt->bindParam(6, $file_path);
+        $stmt->bindParam(7, $clothingsex);
         $stmt->execute();
         header('Location: adminPanel.php');
     }

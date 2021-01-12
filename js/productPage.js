@@ -26,6 +26,6 @@ let selectedId = urlParams.get('category');
         });
 
         function viewNewCategory(newCategory) {
-            window.location.href = "https://christianvillads.tech/opgaver/webShop/products.php?category="+newCategory;
+            window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category="+newCategory;
         }
         

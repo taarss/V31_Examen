@@ -16,6 +16,11 @@ document.querySelector(".addProductBtn").onclick = e => {
         <input id="createProductManufactur" type="text" name="post_manufactur" placeholder="manufactur">
         <select id="createProductType" name="post_type"  required>
         </select>
+        <select id="clothingsex" name="clothingsex" required>
+        <option value="unisex">Unisex</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        </select>
         <textarea id="createProductDescription" name="post_description" required style="resize: none; placeholder="Write your description here:" required></textarea>
         <input type="submit">
     </form>
