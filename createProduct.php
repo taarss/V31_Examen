@@ -1,5 +1,14 @@
 <?php 
     include 'main.php';
+    $stmt = $con->prepare('SELECT adminLevel FROM accounts WHERE id = ?');
+    $stmt->bindParam(1, $_SESSION['id']);
+    $stmt->execute();
+    $accessLevel = $stmt->fetchAll();
+    $stmt = $con->prepare('SELECT manage_products FROM accessLevel WHERE id = ?');
+    $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if ($result[0] >= $accessLevel[0]['adminLevel']) {
     $uploadOk = 1;
     $allowed = array('jpg', 'jpeg', 'gif', 'png', strtolower(end(explode('.', $profile_pic))));
 		$file_name = $_FILES['post_img']['name'];
@@ -25,6 +34,10 @@
 		} else {
 		echo 'fejl';
     }
+  }
+  else {
+    echo "You do not have permission to preform this action.";
+}
 
     function uploadProduct($name, $price, $description, $manufactur, $type, $file_temp, $file_extn, $con, $clothingsex)
     {

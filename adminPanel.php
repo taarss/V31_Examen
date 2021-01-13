@@ -6,7 +6,7 @@
     $stmt->bindParam(1, $_SESSION['id']);
     $stmt->execute();
     $adminLevel = $stmt->fetch();
-    if (intval($adminLevel) == 1) {
+    if (intval($adminLevel[0]) <= 3) {
     }
     else {
         header('Location: index.php');
@@ -39,7 +39,7 @@
             </div>
             <div>
                 <p class="m-0 mt-2">Manage product showcase</p>
-                <button>Manage</button>
+                <button class="manageProductsShowcaseBtn">Manage</button>
             </div>
         </div>
         <div class="border rounded p-5 col-3 m-3 shadow" id="adminOrders">
@@ -90,7 +90,21 @@
                 <button class="toggleApiKeyBtn">Toggle</button>
             </div>
         </div>
+        <div class="border rounded p-5 col-3 m-3 shadow" id="adminAccessLevel">
+            <h5>Access Level</h5>
+            <div>
+                <p class="m-0 mt-2">Manage Admins</p>
+                <button class="manageAdminsBtn">Manage</button>
+            </div>
+            <div>
+                <p class="m-0 mt-2">Manage Access Level Permission</p>
+                <button class="manageAccessLevelBtn">Manage</button>
+            </div>
+        </div>
     </main>
+    <script src="adminJs/manageProductShowcase.js"></script>
+    <script src="adminJs/manageAdmins.js"></script>
+    <script src="adminJs/manageAccessLevel.js"></script>
     <script src="adminJs/manageApiKeys.js"></script>
     <script src="adminJs/addApi.js"></script>
     <script src="adminJs/manageProducts.js"></script>

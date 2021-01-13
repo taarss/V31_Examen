@@ -89,8 +89,8 @@
                                         <img class="card-img-top productImg" src="<?=$key['img']?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
-                                        <h4 class="card-title"><?=$key['name']?></h4>
-                                        <p class="card-text"><?=$key['price']?>.00$</p>
+                                        <h5><?=$key['name']?></h5>
+                                        <p class="card-text"><?=$key['price']?>.99 DKK</p>
                                         <a class="btn" id="addToCart" style="background-color: #333; color: white" href="#">Add to cart</a>
                                     </div>
                             </div>

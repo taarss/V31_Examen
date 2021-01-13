@@ -1,10 +1,23 @@
 <?php 
     include 'main.php';
         echo var_dump($_POST);
-        $stmt = $con->prepare('DELETE FROM apiKey WHERE id = ?');
-        $stmt->bind_param('i', $_POST['id']);
+        $stmt = $con->prepare('SELECT adminLevel FROM accounts WHERE id = ?');
+        $stmt->bindParam(1, $_SESSION['id']);
         $stmt->execute();
-        $stmt->close();
+        $accessLevel = $stmt->fetchAll();
+        $stmt = $con->prepare('SELECT manage_api FROM accessLevel WHERE id = ?');
+        $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        if ($result[0] >= $accessLevel[0]['adminLevel']) {
+            $stmt = $con->prepare('DELETE FROM apiKey WHERE id = ?');
+            $stmt->bindParam(1, $_POST['id']);
+            $stmt->execute();
+        }
+        else {
+            echo "You do not have permission to preform this action.";
+        }
+        
         
         
         

@@ -1,6 +1,19 @@
 <?php 
     include 'main.php';
     $currentPage = 'home';
+    $frontPageProducts = array();
+    $stmt = $con->prepare('SELECT * FROM product_showcase');
+    $stmt->execute();
+    $frontPageProductsId = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+    //echo var_dump($frontPageProductsId[1]);
+
+    for ($i=1; $i < count($frontPageProductsId)+1; $i++) { 
+        $stmt = $con->prepare('SELECT id, name, price, img FROM products WHERE id = ?');
+        $stmt->bindParam(1, $frontPageProductsId[$i]);
+        $stmt->execute();
+        $test = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        array_push($frontPageProducts, $test);
+    }
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -55,7 +68,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll();
                             foreach ($result as $category) {?>
-                                <li><a href="product.php?category=<?=$category['id']?>"><?=$category['name']?></a></li>
+                                <li><a href="products.php?category=<?=$category['id']?>"><?=$category['name']?></a></li>
 
                          <?php   }          
                         ?>
@@ -93,50 +106,116 @@
                     <div class="action">Lær mere</div>
                 </div>
             </div>
-            <div class="frontProducts">
-                <article>
-                    <img src="img/produkt1.jpg" alt="Lækker læderjakke>">
-                    <div class="info">
-                        <h3>Lækker læderjakke</h3>
-                        <div class="stars">
-                            <i class='fa fa-star' aria-hidden='true'></i>
-                            <i class='fa fa-star' aria-hidden='true'></i>
-                            <i class='fa fa-star' aria-hidden='true'></i>
-                            <i class='fa fa-star-o' aria-hidden='true'></i>
-                            <i class='fa fa-star-o' aria-hidden='true'></i>
+            <div id="multi-item-example" class="carousel slide carousel-multi-item col-12" data-ride="carousel">
+            <!--Slides-->
+            <div class="carousel-inner" role="listbox">
+
+                <!--First slide-->
+                <div class="carousel-item active">
+                    <div class="row">
+                       <?php for ($i=0; $i < 3; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i][0]['id'] ?>">
+                                <img id="frontPageProductImg" src="<?= $frontPageProducts[$i][0]['img'] ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i][0]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i][0]['price']?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
                         </div>
+                        <?php  }?>
                     </div>
-                    <div class="description">
-                        <div class="published">
-                            Oprettet: Mandag d. 24/6-2019 af Mark
+                </div>
+                <!--/.First slide-->
+
+                <!--Second slide-->
+                <div class="carousel-item">
+                    <div class="row">
+                    <?php for ($i=3; $i < 6; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i][0]['id'] ?>">
+                                <img  id="frontPageProductImg" src="<?= $frontPageProducts[$i][0]['img'] ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i][0]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i][0]['price'] ?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
                         </div>
-                        <p>Odd Molly er et svensk luksusbrand stiftet af Per Holknekt – tidligere pro skateboarder. Verdenseliten tiltrak dengang mange kvindelige fans, og de fleste af dem gjorde, hvad de kunne for at få fyrenes opmærksomhed. Alle undtagen én. Hun forblev tro mod sig selv - en unik, selvsikker og uforanderlig skønhed - hende, alle fyrene ville ha'. En Odd Molly! - som ikke er et koncept, men autentisk! – et brand, hvis kollektioner er vildt smukke og inderlige, som der altid vil være brug for - dengang, nu, såvel som i fremtiden.
-                            <a href="#">Læs mere...</a></p>
-                        <!-- Mulighed for sletning herunder -->
+                        <?php  }?>
                     </div>
-                </article>
-                <article>
-                    <img src="img/produkt1.jpg" alt="Lækker læderjakke>">
-                    <div class="info">
-                        <h3>Lækker læderjakke</h3>
-                        <div class="stars">
-                            <i class='fa fa-star' aria-hidden='true'></i>
-                            <i class='fa fa-star' aria-hidden='true'></i>
-                            <i class='fa fa-star' aria-hidden='true'></i>
-                            <i class='fa fa-star-o' aria-hidden='true'></i>
-                            <i class='fa fa-star-o' aria-hidden='true'></i>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <div class="published">
-                            Oprettet: Mandag d. 24/6-2019 af Mark
-                        </div>
-                        <p>Odd Molly er et svensk luksusbrand stiftet af Per Holknekt – tidligere pro skateboarder. Verdenseliten tiltrak dengang mange kvindelige fans, og de fleste af dem gjorde, hvad de kunne for at få fyrenes opmærksomhed. Alle undtagen én. Hun forblev tro mod sig selv - en unik, selvsikker og uforanderlig skønhed - hende, alle fyrene ville ha'. En Odd Molly! - som ikke er et koncept, men autentisk! – et brand, hvis kollektioner er vildt smukke og inderlige, som der altid vil være brug for - dengang, nu, såvel som i fremtiden.
-                            <a href="#">Læs mere...</a></p>
-                        <!-- Mulighed for sletning herunder -->
-                    </div>
-                </article>
+
+                </div>
+                <!--/.Second slide-->
             </div>
+            <!--/.Slides-->
+            <!--Indicators-->
+            <ol class="carousel-indicators my-3" id="bestSellersIndicator">
+                <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                <li data-target="#multi-item-example" data-slide-to="1"></li>
+            </ol>
+            <!--/.Indicators-->
+        </div>
+        <div id="multi-item-example2" class="carousel slide carousel-multi-item col-12" data-ride="carousel">
+            <!--Slides-->
+            <div class="carousel-inner mb-5" role="listbox">
+
+                <!--First slide-->
+                <div class="carousel-item active">
+                    <div class="row">
+                       <?php for ($i=6; $i < 9; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i][0]['id'] ?>">
+                                <img id="frontPageProductImg" src="<?= $frontPageProducts[$i][0]['img'] ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i][0]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i][0]['price']?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }?>
+                    </div>
+                </div>
+                <!--/.First slide-->
+
+                <!--Second slide-->
+                <div class="carousel-item">
+                    <div class="row">
+                    <?php for ($i=9; $i < 12; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i][0]['id'] ?>">
+                                <img  id="frontPageProductImg" src="<?= $frontPageProducts[$i][0]['img'] ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i][0]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i][0]['price'] ?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }?>
+                    </div>
+
+                </div>
+                <!--/.Second slide-->
+            </div>
+            <!--/.Slides-->
+            <!--Indicators-->
+            <ol class="carousel-indicators" id="bestSellersIndicator">
+                <li data-target="#multi-item-example2" data-slide-to="0" class="active"></li>
+                <li data-target="#multi-item-example2" data-slide-to="1"></li>
+            </ol>
+            <!--/.Indicators-->
+        </div>
         </div>
     </main>
     <hr>
@@ -183,10 +262,12 @@
 		});
     </script>
     
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')
     </script>
+     <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/plugins.js"></script>
     <script src="js/slider.min.js"></script>
     <script>

@@ -23,7 +23,9 @@ body {
 }
 
 #bestSellersIndicator {
-  position: relative;
+  position: relative !important;
+  margin-bottom: 0;
+  background-color: darkgray;
 }
 
 #bestSellersIndicator li {
@@ -181,6 +183,10 @@ body {
   background-color: #ccbbee;
 }
 
+#adminAccessLevel {
+  background-color: #ace7ff;
+}
+
 .adp {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -253,6 +259,14 @@ body {
 }
 
 .manageApiTable form {
+  width: 100% !important;
+}
+
+.manageAccessLevelTable form:nth-child(odd) {
+  background: lightgray !important;
+}
+
+.manageAccessLevelTable form {
   width: 100% !important;
 }
 

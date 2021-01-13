@@ -16,9 +16,9 @@ header("Content-Type:application/json");
         }
         else {
             $stmt = $con->prepare('SELECT name, description, manufactur, price FROM products');
-            $stmt->execute();;
-            while ($rows_get_rows = $stmt->fetch(PDO::FETCH_ASSOC)) 
-            $json=json_encode($rows_get_rows);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $json=json_encode($rows, JSON_PRETTY_PRINT);
             echo $json;
         }
     }

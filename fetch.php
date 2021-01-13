@@ -26,9 +26,18 @@ if (isset($_POST["query"])) {
         AND type = " . $_POST['category'];
     }
     
-} else {
-	$query = "
+} 
+else {
+    if ($_POST["category"] != 0) {
+        $query = "
+        SELECT * FROM products
+        WHERE type = " . $_POST['category'];
+    }
+    else {
+        $query = "
 	SELECT * FROM products ORDER BY id LIMIT 100";
+    }
+	
 }
 $result = mysqli_query($connect, $query);
 if (mysqli_num_rows($result) > 0) {

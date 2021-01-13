@@ -53,7 +53,7 @@
                         <div class="d-flex justify-content-between w-100">
                             <img class="ml-3" id="productImg" src="<?= $img?>">
                             <div id="productBuyMenu" class="col-4 rounded">
-                                <h4 class="m-2"><?= $price ?>.00$</h4>
+                                <h4 class="m-2"><?= $price ?>.99 DKK</h4>
                                 <p class="rounded">FREE SHIPPING</p>
                                 <p><i class="fas fa-check"></i>30 day open purchase</p>
                                 <p><i class="fas fa-check"></i>Free return</p>
@@ -81,11 +81,11 @@
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $recommendedProducts[$i]['id'] ?>">
-                                <img id="remommendedImg" src="<?= $recommendedProducts[$i]['img'] ?>" alt="Card image cap">
+                                <img id="frontPageProductImg" src="<?= $recommendedProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h4>
-                                    <p class="card-text"><?= $recommendedProducts[$i]['price']?>.00$</p>
+                                    <p class="card-text"><?= $recommendedProducts[$i]['price']?>.99 DKK</p>
                                     <a class="btn" id="addToCart" href="#">Add to cart</a>
                                 </div>
                             </div>
@@ -102,11 +102,11 @@
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $recommendedProducts[$i]['id'] ?>">
-                                <img  id="remommendedImg" src="<?= $recommendedProducts[$i]['img'] ?>" alt="Card image cap">
+                                <img  id="" src="<?= $recommendedProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h4>
-                                    <p class="card-text"><?= $recommendedProducts[$i]['price']?>.00$</p>
+                                    <p class="card-text"><?= $recommendedProducts[$i]['price']?>.99 DKK</p>
                                     <a class="btn" id="addToCart" href="#">Add to cart</a>
                                 </div>
                             </div>

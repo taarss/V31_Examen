@@ -255,6 +255,7 @@ main .products {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-orient: vertical;
@@ -271,6 +272,7 @@ main .products .inspiration {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
 }
 
 main .products .inspiration img {
@@ -714,5 +716,37 @@ h6 {
 
 .inspiration div div a {
   color: black;
+}
+
+#adminAccessLevel {
+  background-color: #ace7ff;
+}
+
+#frontPageProductImg {
+  width: 100%;
+}
+
+.card-body h5 {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#multi-item-example {
+  width: 100%;
+}
+
+#bestSellersIndicator {
+  position: relative;
+}
+
+#bestSellersIndicator li {
+  background-color: darkgray;
+}
+
+#addToCart {
+  background-color: #333;
+  color: white;
 }
 /*# sourceMappingURL=styles.css.map */
