@@ -35,19 +35,13 @@ $navFont: "Oswald", sans-serif;
 
     .search * {
         text-align: center;
+        right: 0;
     }
 
     .search input:first-child {
         border: 1px solid #808080;
-        border-right: none;
         padding: 4px 8px;
         max-width: 200px;
-    }
-
-    .search input:last-child {
-        border: 1px solid #808080;
-        border-left: none;
-        padding: 4px 8px;
     }
 }
 
@@ -657,8 +651,8 @@ h6 {
     h5{
         width: 100%;
         text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
@@ -676,4 +670,17 @@ h6 {
   #addToCart {
     background-color: #333;
     color: white ;
+  }
+
+  .searchResultBox{
+      width: 100%;
+      flex-wrap: wrap;
+      display: flex;
+      background-color: rgb(246, 246, 246);
+      a{
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
   }
