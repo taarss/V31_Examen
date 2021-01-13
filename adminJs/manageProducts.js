@@ -11,7 +11,7 @@ document.querySelector(".manageProductsBtn").onclick = e => {
     <h3>Manage Products</h3>
     <div class="input-group">
 		<input type="text" name="search_text" id="search_text" placeholder="Search by name or product id..." class="form-control" />
-        <select class="manageProductSearch">
+        <select id="searchCategoryCombobox" class="manageProductSearch">
             <option selected="selected" value=0>All Categories</option>
         </select>
     </div>
@@ -40,7 +40,6 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                     category: category
 				},
 				success: function(data) {    
-                    console.log(data);
                     test = JSON.parse(data);
                     createRow(test);
 				}
@@ -51,11 +50,23 @@ document.querySelector(".manageProductsBtn").onclick = e => {
             var search = $(this).val();
             document.querySelectorAll('.updateProductForm').forEach(e => e.remove());
 			if (search != '') {
-				load_data(search, document.getElementsByClassName("manageProductSearch").value);
+                let yourSelect = document.getElementById("searchCategoryCombobox" );
+                let selectedCat = yourSelect.options[ yourSelect.selectedIndex ].value;
+				load_data(search, selectedCat);
 			} else {
 				load_data();
 			}
-		});
+        });
+        document.getElementById("searchCategoryCombobox").addEventListener("change", function(){
+            let yourSelect = document.getElementById("searchCategoryCombobox" );
+            let selectedCat = yourSelect.options[ yourSelect.selectedIndex ].value;
+            document.querySelector("#search_text").innerHTML = "";
+            document.querySelector("#search_text").nodeValue = "";
+
+            document.querySelectorAll('.updateProductForm').forEach(e => e.remove());
+            load_data("", selectedCat);
+
+        });
 	});
 
 
@@ -72,7 +83,6 @@ document.querySelector(".manageProductsBtn").onclick = e => {
             url: url,
             data: form.serialize(),
             success: function(data) {
-                console.log(data);
             }
         });
     });
@@ -86,7 +96,6 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 "id": id,
             },
             success: function(data) { 
-                console.log(data);
             }
         });
         

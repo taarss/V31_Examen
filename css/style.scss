@@ -19,7 +19,10 @@ body{
   color: white;
 }
 #bestSellersIndicator {
-  position: relative;
+  position: relative !important;
+  margin-bottom: 0;
+  background-color: darkgray;
+
   li {
     background-color: darkgray;
   }
@@ -155,6 +158,9 @@ body{
 #adminApiKey{
   background-color: #ccbbee
 }
+#adminAccessLevel{
+  background-color: #ace7ff;
+}
 .adp {
   display: flex;
   box-sizing: border-box;
@@ -215,6 +221,13 @@ body{
     width: 100% !important;
   }
 }
+.manageAccessLevelTable{
+  form:nth-child(odd) {background: lightgray !important} 
+  form{
+    width: 100% !important;
+  }
+}
+
 .manageProductsImg{
   width: 270px !important;
 }

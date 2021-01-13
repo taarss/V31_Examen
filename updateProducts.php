@@ -1,5 +1,14 @@
 <?php 
     include 'main.php';
+    $stmt = $con->prepare('SELECT adminLevel FROM accounts WHERE id = ?');
+    $stmt->bindParam(1, $_SESSION['id']);
+    $stmt->execute();
+    $accessLevel = $stmt->fetchAll();
+    $stmt = $con->prepare('SELECT manage_products FROM accessLevel WHERE id = ?');
+    $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if ($result[0] >= $accessLevel[0]['adminLevel']) {
       if ($_FILES['post_img']['name'] != "") {
         $uploadOk = 1;
         $allowed = array('jpg', 'jpeg', 'gif', 'png', strtolower(end(explode('.', $profile_pic))));
@@ -32,7 +41,11 @@
         updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['isOnSale'], $_POST['description'], $_POST['manufactur'], $_POST['saleValue'], $_POST['category'], $con, $_POST['clothingsex']);
       }
     
-
+    }
+    else {
+      echo "You do not have permission to preform this action.";
+  }
+  
     function updateIcon($id, $file_temp, $file_extn, $con){
       $file_path = 'uploads/' . substr(md5(time()), 0, 10) . '.' . $file_extn;
       move_uploaded_file($file_temp, $file_path);

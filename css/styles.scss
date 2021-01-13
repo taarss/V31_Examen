@@ -234,6 +234,7 @@ main {
 
     .products {
         flex: 1;
+        width: 100%;
         flex-wrap: wrap;
         flex-direction: columns;
 
@@ -243,6 +244,7 @@ main {
 
         .inspiration {
             display: flex;
+            width: 100%;
 
             img {
                 width: 100%;
@@ -641,3 +643,37 @@ h6 {
         }
     }
 }
+
+#adminAccessLevel{
+    background-color: #ace7ff;
+  }
+
+
+#frontPageProductImg{
+    width: 100%;
+    
+}
+.card-body{
+    h5{
+        width: 100%;
+        text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    }
+}
+
+#multi-item-example{
+    width: 100%;
+}
+
+#bestSellersIndicator {
+    position: relative;  
+    li {
+      background-color: darkgray;
+    }
+  }
+
+  #addToCart {
+    background-color: #333;
+    color: white ;
+  }

@@ -14,7 +14,7 @@
     <div class="container home">
         <a href="index.php"><img src="img/homeIcon.png" alt="Forside ikon"></a>
         <!-- Velkomstbesked -->
-        <h2></h2>
+        <h2>Velkommen <?= $_SESSION['name'] ?>!</h2>
     </div>
     <hr>
 <div class="container navbar">
@@ -36,7 +36,7 @@
                $stmt->bindParam(1, $_SESSION['id']);
                $stmt->execute();
                $adminLevel = $stmt->fetch();
-               if (intval($adminLevel) == 1) {?>
+               if (intval($adminLevel[0]) <= 3 && $_SESSION['id'] != null) {?>
                 <li class="<?php if($currentPage =='adminpanel'){echo 'active';}?>"><a href='adminPanel.php'>Admin Panel</a></li>
               <?php }
                ?>

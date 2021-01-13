@@ -1,5 +1,15 @@
 <?php 
     include 'main.php';
+    $stmt = $con->prepare('SELECT adminLevel FROM accounts WHERE id = ?');
+    $stmt->bindParam(1, $_SESSION['id']);
+    $stmt->execute();
+    $accessLevel = $stmt->fetchAll();
+    $stmt = $con->prepare('SELECT manage_categories FROM accessLevel WHERE id = ?');
+    $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    if ($result[0] >= $accessLevel[0]['adminLevel']) {
+
       if ($_FILES['post_img']['name'] != "") {
         $uploadOk = 1;
         $allowed = array('jpg', 'jpeg', 'gif', 'png', strtolower(end(explode('.', $profile_pic))));
@@ -32,7 +42,11 @@
         updateCategory($_POST['name'], $_POST['id'], $con, $_POST['productRelation']);
       }
     
-
+    }
+    else {
+      echo "You do not have permission to preform this action.";
+  }
+  
     function updateCategoryWithIcon($name, $id, $file_temp, $file_extn, $con)
     {
       $file_path = 'uploads/' . substr(md5(time()), 0, 10) . '.' . $file_extn;
