@@ -37,19 +37,13 @@
 
 .top .search * {
   text-align: center;
+  right: 0;
 }
 
 .top .search input:first-child {
   border: 1px solid #808080;
-  border-right: none;
   padding: 4px 8px;
   max-width: 200px;
-}
-
-.top .search input:last-child {
-  border: 1px solid #808080;
-  border-left: none;
-  padding: 4px 8px;
 }
 
 .home img {
@@ -748,5 +742,22 @@ h6 {
 #addToCart {
   background-color: #333;
   color: white;
+}
+
+.searchResultBox {
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #f6f6f6;
+}
+
+.searchResultBox a {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /*# sourceMappingURL=styles.css.map */
