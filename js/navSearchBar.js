@@ -1,5 +1,5 @@
 
-    $('#search_text').keyup(function() {
+    $('#navsearch_text').keyup(function() {
         document.querySelectorAll('.searchResultLink').forEach(e => e.remove());
             var search = $(this).val();
             load_data(search);			

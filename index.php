@@ -24,6 +24,7 @@
     <title>Forside | FancyClothes.dk</title>
     <meta name="description" content="Velkommen til FancyClothes.dk">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find our collection entire online here and find the right Lifewear to suit your style">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -98,12 +99,12 @@
                 <div class="catMen">
                     <img src="img/kategoriHerre.jpg" alt="">
                     <h5>Herretøj</h5>
-                    <div class="action">Lær mere</div>
+                    <div class="action"><a href="products.php?category=0&gender=male" class="genderMale">Se mere</a></div>
                 </div>
                 <div class="catWomen">
                     <img src="img/kategoriKvinde.jpg" alt="">
                     <h5>Kvindetøj</h5>
-                    <div class="action">Lær mere</div>
+                    <div class="action"><a href="products.php?category=0&gender=female" class="genderMale">Se mere</a></div>
                 </div>
             </div>
             <div id="multi-item-example" class="carousel slide carousel-multi-item col-12" data-ride="carousel">

@@ -10,11 +10,13 @@
     $result = $stmt->fetch();
     if ($result[0] == 1) {
         $stmt = $con->prepare('UPDATE accounts SET adminLevel = ? WHERE id = ?');
-        $stmt->bindParam(1,  $a = 4);
-        $stmt->bindParam(2, $_POST['id']);
+        $stmt->bindParam(1, $_POST['user']);
+        $stmt->bindParam(2, $_POST['level']);
         $stmt->execute();
-        echo $_POST['id'];
+        header('Location: adminPanel.php');
     }
     else {
         echo "You do not have permission to preform this action.";
     }
+    
+    

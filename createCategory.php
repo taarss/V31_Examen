@@ -8,7 +8,7 @@
     $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
     $stmt->execute();
     $result = $stmt->fetch();
-    if ($result[0] >= $accessLevel[0]['adminLevel']) {
+    if ($result[0] == 1) {
     $uploadOk = 1;
     $allowed = array('jpg', 'jpeg', 'gif', 'png', strtolower(end(explode('.', $profile_pic))));
 		$file_name = $_FILES['post_img']['name'];

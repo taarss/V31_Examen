@@ -22,14 +22,28 @@ body {
   color: white;
 }
 
+.card-body h5 {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#multi-item-example {
+  width: 100%;
+}
+
 #bestSellersIndicator {
-  position: relative !important;
-  margin-bottom: 0;
-  background-color: darkgray;
+  position: relative;
 }
 
 #bestSellersIndicator li {
   background-color: darkgray;
+}
+
+#addToCart {
+  background-color: #333;
+  color: white;
 }
 
 #bestSellerImg {

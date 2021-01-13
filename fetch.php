@@ -35,7 +35,7 @@ else {
     }
     else {
         $query = "
-	SELECT * FROM products ORDER BY id LIMIT 100";
+	SELECT * FROM products ORDER BY id LIMIT 20";
     }
 	
 }

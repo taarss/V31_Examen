@@ -2,7 +2,7 @@
     include 'main.php';
     $currentPage = 'products';
     $currentProduct = $_GET['id'];
-    $stmt = $con->prepare('SELECT id, name, price, isOnSale, img, description, manufactur, type, saleValue, dateCreated FROM products WHERE id = ?');
+    $stmt = $con->prepare('SELECT id, name, price, isOnSale, img, description, manufactur, type, saleValue, dateCreated , createdBy FROM products WHERE id = ?');
     $stmt->bindParam(1, $currentProduct);
     $stmt->execute();
     $product = $stmt->fetch();
@@ -16,6 +16,7 @@
     $type = $product['type'];
     $saleValue = $product['saleValue'];
     $dateCreated = $product['dateCreated'];
+    $createdBy = $product['createdBy'];
 
 
     $stmt = $con->prepare('SELECT * FROM products WHERE type = ? ORDER BY RAND()
@@ -48,7 +49,7 @@
                         <div>
                             <h3 class="m-3"><?= $name?></h3>
                             <h5 class=" ml-3 text-secondary"><?= $manufactur?></h5>
-                            <p class=" ml-3 text-secondary"><?= $manufactur . $id . $dateCreated?></p>
+                            <p class=" ml-3 text-secondary"><?= $manufactur . $id . $dateCreated ."-". $createdBy?></p>
                         </div>
                         <div class="d-flex justify-content-between w-100">
                             <img class="ml-3" id="productImg" src="<?= $img?>">
@@ -84,7 +85,7 @@
                                 <img id="frontPageProductImg" src="<?= $recommendedProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
-                                    <h4 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h4>
+                                    <h5 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h5>
                                     <p class="card-text"><?= $recommendedProducts[$i]['price']?>.99 DKK</p>
                                     <a class="btn" id="addToCart" href="#">Add to cart</a>
                                 </div>
@@ -105,7 +106,7 @@
                                 <img  id="" src="<?= $recommendedProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
-                                    <h4 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h4>
+                                    <h5 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h5>
                                     <p class="card-text"><?= $recommendedProducts[$i]['price']?>.99 DKK</p>
                                     <a class="btn" id="addToCart" href="#">Add to cart</a>
                                 </div>
@@ -157,6 +158,7 @@
         window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')
     </script>
     <script src="js/plugins.js"></script>
+    <script src="js/navSearchBar.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

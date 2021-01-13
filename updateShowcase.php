@@ -9,7 +9,7 @@
         $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
         $stmt->execute();
         $result = $stmt->fetch();
-        if ($result[0] >= $accessLevel[0]['adminLevel']) {
+        if ($result[0] == 1) {
             $index = 1;
             foreach ($_POST['callFunc2'] as $key) {
                 $stmt = $con->prepare('UPDATE product_showcase SET productId = ? WHERE id = ?');

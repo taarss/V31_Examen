@@ -24,7 +24,6 @@ document.querySelector(".manageProductsBtn").onclick = e => {
         <h4 class="col-1">Category</h4>
         <h4 class="col-2">Description</h4>
         <h4 class="col-3">Image</h4>
-
     </div>
     `;
 

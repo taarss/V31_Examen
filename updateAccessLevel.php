@@ -12,7 +12,7 @@
 
     //echo "You need access level " . $result['manage_accessLevel'];
     //echo "Your access level is ". var_dump($accessLevel);
-    if ($result[0] >= $accessLevel[0]['adminLevel']) {
+    if ($result[0] == 1) {
         $manageProducts = $_POST['manageProductsRadio'];
         $manageCategories = $_POST['manageCategoriesRadio'];
         $manageApi = $_POST['manageApiRadio'];
