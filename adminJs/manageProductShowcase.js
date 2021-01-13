@@ -1,4 +1,5 @@
 document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
+    console.log("fdfdf");
     let showcasedProducts;
     $.ajax({
         url: "getProductShowcase.php",

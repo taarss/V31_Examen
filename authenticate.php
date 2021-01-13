@@ -6,7 +6,7 @@ if (!isset($_POST['username'], $_POST['password'])) {
 	exit('Please fill both the username and password field!');
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-$stmt = $con->prepare('SELECT id, password, activation_code FROM accounts WHERE username = ?');
+$stmt = $con->prepare('SELECT id, password, activation_code, isBanned FROM accounts WHERE username = ?');
 $stmt->bindParam(1, $_POST['username']);
 $stmt->execute();
 $user = $stmt->fetch();
@@ -17,7 +17,7 @@ if ($user) {
 	$activation_code = $user['activation_code'];
 	// Account exists, now we verify the password.
 	// remember to use password_hash in your registration file to store the hashed passwords.
-	if (password_verify($_POST['password'], $password) && $activation_code == 'activated') {
+	if (password_verify($_POST['password'], $password) && $activation_code == 'activated' && $user['isBanned'] == 0) {
 		// Verification success! User has loggedin!
 		// Create sessions so we know the user is logged in, they basically act like cookies but remember the data on the server.
 		session_regenerate_id();

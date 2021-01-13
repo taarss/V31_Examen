@@ -8,7 +8,7 @@
     $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
     $stmt->execute();
     $result = $stmt->fetch();
-    if ($result[0] >= $accessLevel[0]['adminLevel']) {
+    if ($result[0] == 1) {
     $uploadOk = 1;
     $allowed = array('jpg', 'jpeg', 'gif', 'png', strtolower(end(explode('.', $profile_pic))));
 		$file_name = $_FILES['post_img']['name'];
@@ -43,7 +43,7 @@
     {
         $file_path = 'uploads/' . substr(md5(time()), 0, 10) . '.' . $file_extn;
         move_uploaded_file($file_temp, $file_path);
-        $stmt = $con->prepare('INSERT INTO products (name, price, description, manufactur, type, img, sex) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $con->prepare('INSERT INTO products (name, price, description, manufactur, type, img, sex, createdBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->bindParam(1, $name);
         $stmt->bindParam(2, $price);
         $stmt->bindParam(3, $description);
@@ -51,6 +51,7 @@
         $stmt->bindParam(5, $type);
         $stmt->bindParam(6, $file_path);
         $stmt->bindParam(7, $clothingsex);
+        $stmt->bindParam(8, $_SESSION['id']);
         $stmt->execute();
         header('Location: adminPanel.php');
     }

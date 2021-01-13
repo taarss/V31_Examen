@@ -8,9 +8,8 @@
             <span>DKK</span>
         </div>
             <div class="search position-relative">
-                <input id="search_text" type="text" placeholder="Indtast søgning" autocomplete="off"
->
-                <div class="border searchResultBox position-absolute" id="searchBoxResult">
+                <input id="navsearch_text" type="text" placeholder="Indtast søgning"><input type="submit" value="Søg">
+                <div class="searchResultBox position-absolute" id="searchBoxResult">
                 </div>
             </div>
     </div>

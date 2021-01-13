@@ -11,7 +11,7 @@ header("Content-Type:application/json");
         $stmt->execute();
         $result = $stmt->fetch();
         if ($result == null) {
-            echo "INCORRECT API KEY ERR 200";
+            echo "INCORRECT API KEY ERR 401";
 
         }
         else {

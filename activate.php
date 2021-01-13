@@ -18,7 +18,7 @@ if (isset($_GET['email'], $_GET['code']) && !empty($_GET['code'])) {
 		$stmt->bindParam(2, $_GET['email']);
 		$stmt->bindParam(3, $_GET['code']);
 		$stmt->execute();
-		$msg = 'Your account is now activated, you can now login!<br><a href="login.php">Login</a>';
+		$msg = 'Your account is now activated, you can now login!<br><a href="index.php">Login</a>';
 	} else {
 		$msg = 'The account is already activated or doesn\'t exist!';
 	}

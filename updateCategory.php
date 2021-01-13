@@ -8,7 +8,7 @@
     $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
     $stmt->execute();
     $result = $stmt->fetch();
-    if ($result[0] >= $accessLevel[0]['adminLevel']) {
+    if ($result[0] == 1) {
 
       if ($_FILES['post_img']['name'] != "") {
         $uploadOk = 1;

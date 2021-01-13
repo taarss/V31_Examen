@@ -45,8 +45,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse our collection online here and find the right Lifewear to suit your style">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <title>Document</title>
+    <title>Products | FancyClothes.dk</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
@@ -83,7 +84,7 @@
                 </div>
                 <div class="d-flex flex-wrap mt-5">
                     <?php foreach ($products as $key) {?>   
-                        <div class="col-3 d-block ">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-block ">
                             <div class="card mb-2 productPageContainer">
                                     <a href="product.php?id=<?=$key['id']?>">
                                         <img class="card-img-top productImg" src="<?=$key['img']?>" alt="Card image cap">
@@ -123,7 +124,7 @@
 			});
 		});
     </script>
-    
+        <script src="js/navSearchBar.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')

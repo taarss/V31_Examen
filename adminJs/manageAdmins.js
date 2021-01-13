@@ -43,11 +43,17 @@ document.querySelector(".manageAdminsBtn").onclick = e => {
                 accessLevelInput.setAttribute("class", "col-3 mx-2 manageAccessLevelInput");
                 accessLevelInput.setAttribute("name", "accessLevel");
                 rowForm.appendChild(accessLevelInput);
-                rowForm.setAttribute("action", "updateCategory.php")
                 rowForm.setAttribute("method", "post")
                 let saveChangesInput = document.createElement("input");
                 saveChangesInput.setAttribute("type", "submit");
                 saveChangesInput.setAttribute("class", "col-1");
+                saveChangesInput.addEventListener('click', function(){ 
+                    event.preventDefault();
+                    let yourSelect = this.parentNode.querySelector(".manageAccessLevelInput");
+                    let selectedLevel = yourSelect.options[ yourSelect.selectedIndex ].value;
+                    let accountId = this.parentNode.querySelector(".categoryId").value;   
+                    updateLevel(accountId, selectedLevel);
+                });
                 rowForm.appendChild(saveChangesInput);
                 rowForm.setAttribute("class", "col-12 updateCategoryForm");
                 let deleteData = document.createElement("button");
@@ -74,19 +80,16 @@ document.querySelector(".manageAdminsBtn").onclick = e => {
     });
     
 
-    $("#updateCategoryForm").submit(function(event) {
-        event.preventDefault();
-        var form = $(this);
-        var url = form.attr('action');
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(),
-            success: function(data) {
-                
-            }
-        });
+  function updateLevel(id, level) {
+    $.ajax({
+        url: 'updateAdminLevel.php',
+        type: 'post',
+        data: {
+            "user": level,
+            "level": id,
+        }
     });
+  }
 
     function demoteAdmin(id) {
         $.ajax({

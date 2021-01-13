@@ -9,7 +9,7 @@
     $stmt->bindParam(1, $accessLevel[0]['adminLevel']);
     $stmt->execute();
     $result = $stmt->fetch();
-    if ($result[0] >= $accessLevel[0]['adminLevel']) {
+    if ($result[0] == 1) {
         if ($_POST['productRealtion'] == "1") {
             $stmt = $con->prepare('DELETE categories, products FROM categories  
             INNER JOIN products ON categories.id=products.type  
